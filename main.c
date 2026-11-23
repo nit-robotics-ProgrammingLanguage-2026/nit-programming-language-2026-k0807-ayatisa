@@ -1,20 +1,25 @@
 #include <stdio.h>
 #include <math.h>
 
-void to_polar(double x, double y, double *r, double *theta);
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 
-int main(void)
-{
-    double x, y;
-    double r, theta;
-    scanf("%lf %lf", &x, &y);
-    /* TODO: to_polar を呼び出す */
-
-    printf("%.3f,%.2f", r, theta);
-    return 0;
+void to_polar(double x, double y, double *r, double *theta) {
+    *r = sqrt(x * x + y * y);
+    *theta = atan2(y, x) * 180.0 / M_PI;
 }
 
-void to_polar(double x, double y, double *r, double *theta)
-{
-    /* TODO: r と theta をポインタ引数を通じて計算・格納 */
+int main(void) {
+    double x, y;
+    double r, theta;
+
+    if (scanf("%lf %lf", &x, &y) != 2) {
+        return 1;
+    }
+
+    to_polar(x, y, &r, &theta);
+    printf("%.3f,%.2f", r, theta);
+
+    return 0;
 }
